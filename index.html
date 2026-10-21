@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PA配線図エディタ</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎛️</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-group">
+      <input id="ttl" type="text" placeholder="タイトル" class="input-title">
+    </div>
+    <div class="header-group">
+      <button id="bUndo" type="button" title="Ctrl+Z">↩元に戻す</button>
+    </div>
+    <div class="header-group">
+      <button id="bDev" type="button">＋機材</button>
+      <button id="bDiv" type="button">＋区切り線</button>
+      <button id="bTxt" type="button">＋テキスト</button>
+    </div>
+    <div class="header-group">
+      <button id="bConn" type="button">接続モード</button>
+      <select id="cType" aria-label="ケーブル種別"></select>
+    </div>
+    <div class="header-group">
+      <button id="bAuto" type="button">自動配置</button>
+      <button id="bPrint" type="button" class="btn-primary">PDF出力 (印刷)</button>
+      <button id="bNew" type="button" class="btn-danger">新規作成</button>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <div id="cv" class="canvas-container">
+      <svg id="svg"></svg>
+    </div>
+
+    <aside class="sidebar">
+      <!-- プロパティ編集パネル -->
+      <section id="pn" class="panel hid"></section>
+
+      <div class="hint-box">
+        <p class="hint" id="hint">
+          操作ヒント<br>
+          ・機材をドラッグで移動。<br>
+          ・接続モードで 接続元➔接続先 の順に選択。<br>
+          ・配線をクリックすると表示される青い丸をドラッグして、線のルートを自由に変更できます。<br>
+          ・Ctrl+Zで直前の操作を取り消せます。
+        </p>
+      </div>
+
+      <!-- データ保存/読み込み -->
+      <section class="panel-section">
+        <h3>保存 / 読み込み</h3>
+        <p class="hint">編集内容は自動保存されます。データ移行にはJSONを使用します。</p>
+        <div class="row">
+          <button id="bExp" type="button">JSONコピー</button>
+          <button id="bImp" type="button">JSON読み込み</button>
+        </div>
+        <textarea id="js" placeholder="ここにJSONデータが表示されます..."></textarea>
+      </section>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

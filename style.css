@@ -1,0 +1,230 @@
+:root {
+  --bg-color: #f6f6f4;
+  --fg-color: #222222;
+  --panel-bg: #ffffff;
+  --border-color: #d4d4d0;
+  --accent-color: #2b7de9;
+  --accent-active: #e8590c;
+  --danger-color: #d9383a;
+  
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-color: #1b1b1d;
+    --fg-color: #eeeeee;
+    --panel-bg: #27272a;
+    --border-color: #444444;
+    --accent-color: #6ea8fe;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg-color: #1b1b1d;
+  --fg-color: #eeeeee;
+  --panel-bg: #27272a;
+  --border-color: #444444;
+  --accent-color: #6ea8fe;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--fg-color);
+  font-family: "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ヘッダー UI */
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: var(--panel-bg);
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.header-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.input-title {
+  width: 170px;
+  font-weight: bold;
+}
+
+/* フォームコントロール */
+button, input, select, textarea {
+  font: inherit;
+  color: var(--fg-color);
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 5px 9px;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+button:hover {
+  border-color: var(--accent-color);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.on {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+}
+
+.btn-danger:hover {
+  border-color: var(--danger-color);
+  color: var(--danger-color);
+}
+
+/* レイアウト */
+.app-main {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  align-items: flex-start;
+}
+
+.canvas-container {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.canvas-container svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 900px;
+  touch-action: none;
+  user-select: none;
+}
+
+/* サイドバー UI */
+.sidebar {
+  width: 260px;
+  flex: none;
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar h3 {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 4px;
+}
+
+.sidebar label {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.row {
+  display: flex;
+  gap: 6px;
+}
+
+.row > * {
+  flex: 1;
+  min-width: 0;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  font-family: monospace;
+  font-size: 11px;
+  resize: vertical;
+}
+
+.hint-box {
+  background-color: rgba(0,0,0,0.03);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.hint {
+  font-size: 12px;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.hid {
+  display: none !important;
+}
+
+/* 印刷・PDF表示用スタイル */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 8mm;
+  }
+  
+  .app-header,
+  .sidebar,
+  .hint-box {
+    display: none !important;
+  }
+  
+  .app-main {
+    padding: 0;
+  }
+  
+  body {
+    background-color: #ffffff;
+  }
+  
+  .canvas-container {
+    border: none;
+    overflow: visible;
+    box-shadow: none;
+  }
+  
+  .canvas-container svg {
+    min-width: 0;
+  }
+}
